@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <!-- Gradient Welcome Card -->
+    <div class="card border-0 shadow-lg mb-4 overflow-hidden" style="border-radius: 16px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff;">
+      <div class="card-body p-5 position-relative">
+        <!-- Decorative subtle background circle -->
+        <div style="position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.1); pointer-events: none;"></div>
+        <div style="position: absolute; left: 10%; bottom: -30px; width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.05); pointer-events: none;"></div>
+        
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center shadow" style="width: 60px; height: 60px; font-size: 28px;">
+            👤
+          </div>
+          <div class="ms-4">
+            <h5 class="text-uppercase mb-0 opacity-75" style="letter-spacing: 1px; font-size: 0.85rem;">Portal del Cliente</h5>
+            <h2 class="fw-bold mb-0">¡Bienvenido, {{ user.first_name }} {{ user.last_name }}!</h2>
+          </div>
+        </div>
+        <p class="mb-0 mt-3 opacity-90 fs-5">Nos alegra tenerte de vuelta. Aquí puedes gestionar tu cuenta y ver tus datos.</p>
+      </div>
+    </div>
+
+    <!-- Details Card -->
+    <div class="card border-0 shadow-sm mb-4" style="border-radius: 16px;">
+      <div class="card-body p-4">
+        <h4 class="fw-bold text-dark mb-4 d-flex align-items-center">
+          <span class="me-2 text-primary">📝</span> Datos de tu Cuenta
+        </h4>
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3">
+              <span class="text-muted d-block small mb-1">Nombre de usuario</span>
+              <strong class="text-dark fs-5">{{ user.username }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3">
+              <span class="text-muted d-block small mb-1">Correo electrónico</span>
+              <strong class="text-dark fs-5">{{ user.email|default:"No especificado" }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3">
+              <span class="text-muted d-block small mb-1">Nombre Completo</span>
+              <strong class="text-dark fs-5">{{ user.first_name }} {{ user.last_name }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3">
+              <span class="text-muted d-block small mb-1">Rol de Acceso</span>
+              <span class="badge bg-success fs-6 py-2 px-3 mt-1">Cliente Autorizado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Actions/Info -->
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100 card-hoverable" style="border-radius: 16px; transition: transform 0.2s ease;">
+          <div class="card-body p-4 d-flex flex-column justify-content-between">
+            <div>
+              <div class="text-warning mb-3" style="font-size: 2rem;">🛠️</div>
+              <h5 class="fw-bold text-dark">Soporte Técnico</h5>
+              <p class="text-muted">¿Tienes alguna pregunta o necesitas ayuda con el sistema? Nuestro equipo está listo para ayudarte.</p>
+            </div>
+            <a href="#" class="btn btn-outline-primary mt-3 w-100 py-2 fw-semibold" style="border-radius: 10px;">Contactar Soporte</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100 card-hoverable" style="border-radius: 16px; transition: transform 0.2s ease;">
+          <div class="card-body p-4 d-flex flex-column justify-content-between">
+            <div>
+              <div class="text-info mb-3" style="font-size: 2rem;">📄</div>
+              <h5 class="fw-bold text-dark">Mis Actividades</h5>
+              <p class="text-muted">Visualiza el historial de solicitudes, cotizaciones o interacciones previas registradas.</p>
+            </div>
+            <a href="#" class="btn btn-outline-info mt-3 w-100 py-2 fw-semibold" style="border-radius: 10px;">Ver Actividades</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .card-hoverable:hover {
+    transform: translateY(-5px);
+  }
+</style>
+{% endblock %}

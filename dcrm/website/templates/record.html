@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+  <div class="card mb-3">
+    <div class="card-header bg-dark text-white fw-bold d-flex justify-content-between align-items-center">
+      <span>Ficha de Cliente: {{ customer_record.first_name }} {{ customer_record.last_name }}</span>
+      <span class="badge bg-secondary">ID: {{ customer_record.id }}</span>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>Nombre:</strong> {{ customer_record.first_name }}</p>
+      <hr>
+      <p class="card-text"><strong>Apellido:</strong> {{ customer_record.last_name }}</p>
+      <hr>
+      <p class="card-text"><strong>Email:</strong> {{ customer_record.email }}</p>
+      <hr>
+      <p class="card-text"><strong>Teléfono:</strong> {{ customer_record.phone }}</p>
+      <hr>
+      <p class="card-text"><strong>Dirección:</strong> {{ customer_record.address }}</p>
+      <hr>
+      <p class="card-text"><strong>Ciudad:</strong> {{ customer_record.city }}</p>
+      <hr>
+      <p class="card-text"><strong>Estado:</strong> {{ customer_record.state }}</p>
+      <hr>
+      <p class="card-text"><small class="text-muted">Agregado por el usuario: <strong>{{ customer_record.user.username }}</strong></small></p>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">⬅️ Volver al Inicio</a>
+    <div>
+      <a href="{% url 'update_record' customer_record.id %}" class="btn btn-secondary">✏️ Editar</a>
+      <a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar permanentemente este registro?');">🗑️ Eliminar</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

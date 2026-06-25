@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-info fs-4" href="{% if user.is_authenticated and not user.is_staff and not user.is_superuser %}{% url 'client_home' %}{% else %}{% url 'home' %}{% endif %}">🌐 CRM Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+        {% if user.is_authenticated %}
+          {% if user.is_staff or user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link active fw-semibold text-warning px-3" href="{% url 'home' %}">📋 Panel CRUD</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active fw-semibold text-info px-3" href="{% url 'add_record' %}">➕ Agregar Registro</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link active fw-semibold text-success px-3" href="{% url 'client_home' %}">👤 Panel Cliente</a>
+            </li>
+          {% endif %}
+
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-outline-danger px-3 py-2" href="{% url 'logout' %}" style="border-radius: 8px;">Cerrar Sesión</a>
+          </li>
+
+        {% else %}
+
+          <li class="nav-item">
+            <a class="nav-link active px-3" aria-current="page" href="{% url 'register' %}">Registrarse</a>
+          </li>
+
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-info text-dark fw-semibold px-4 py-2" aria-current="page" href="{% url 'home' %}" style="border-radius: 8px;">Iniciar Sesión</a>
+          </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+

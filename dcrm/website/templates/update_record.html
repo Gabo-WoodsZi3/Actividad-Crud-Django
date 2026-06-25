@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+  <h1 class="mb-4">✏️ Editar Cliente</h1>
+  
+  <div class="card bg-light">
+    <div class="card-body">
+      <form method="POST">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+          <div class="alert alert-danger" role="alert">
+            Corrige los errores a continuación.
+          </div>
+        {% endif %}
+        
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label fw-bold">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <div class="form-text text-muted">{{ field.help_text|safe }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="text-danger small mt-1">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        
+        <br/>
+        <div class="d-flex justify-content-between">
+          <a href="{% url 'record' form.instance.id %}" class="btn btn-outline-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-secondary">Actualizar Registro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
