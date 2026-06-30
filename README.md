@@ -1,198 +1,146 @@
-# 📝 Django CRUD
+# CRM Django - Gestión de clientes
 
-Un proyecto desarrollado con **Django** que implementa las operaciones básicas de un sistema CRUD (Crear, Leer, Actualizar y Eliminar registros).
+Aplicación web CRM desarrollada con Django para administrar registros de clientes, permitir el acceso de usuarios regulares a un portal de cliente y ofrecer un flujo básico de creación, edición, visualización y eliminación de registros.
 
-## 📋 Características
+## 🚀 Características principales
 
-- ✅ Crear registros
-- 📖 Listar registros
-- ✏️ Editar registros existentes
-- ❌ Eliminar registros
-- 🔍 Validación de formularios
-- 🎨 Interfaz con Bootstrap
-- 🗄️ Base de datos SQLite (por defecto)
-- 🔐 Panel de administración de Django
+- Registro e inicio de sesión de usuarios.
+- Panel de administración para gestionar clientes.
+- Portal específico para usuarios clientes.
+- CRUD completo de registros de clientes.
+- Diseño responsive con Bootstrap y crispy-forms.
+- Soporte para MySQL cuando está disponible, con fallback automático a SQLite.
 
-## 🛠️ Tecnologías utilizadas
+## 🧰 Tecnologías utilizadas
 
-- Python 3.x
-- Django 5.x
-- HTML5
-- CSS3
-- Bootstrap 5
-- SQLite
+- Python 3.11+
+- Django 5.0
+- SQLite / MySQL
+- Bootstrap 5 (a través de crispy-bootstrap5)
+- Django Crispy Forms
+- Django Import Export
+- Django Filters
 
-## 📂 Estructura del proyecto
+## 📁 Estructura del proyecto
 
-```
-django-crud/
-│
-├── crud/
-│   ├── migrations/
-│   ├── templates/
-│   ├── static/
-│   ├── admin.py
-│   ├── forms.py
-│   ├── models.py
-│   ├── urls.py
-│   └── views.py
-│
-├── proyecto/
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-│
-├── db.sqlite3
-├── manage.py
+```text
+.
 ├── requirements.txt
-└── README.md
+├── dcrm/
+│   ├── manage.py
+│   ├── db.sqlite3
+│   ├── dcrm/                 # configuración principal del proyecto
+│   └── website/              # app principal del CRM
+│       ├── forms.py
+│       ├── models.py
+│       ├── views.py
+│       ├── urls.py
+│       └── templates/
 ```
 
-## 🚀 Instalación
+## ⚙️ Requisitos previos
 
-### 1. Clonar el repositorio
+- Python 3.11 o superior
+- pip
+- MySQL (opcional, si deseas usarla como base de datos principal)
+
+## 🔧 Instalación
+
+1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/django-crud.git
+git clone https://github.com/tu-usuario/tu-repositorio.git
+cd tu-repositorio
 ```
 
-### 2. Entrar al proyecto
+2. Crea y activa un entorno virtual:
 
 ```bash
-cd django-crud
+python -m venv env
+source env/bin/activate      # Linux/macOS
+env\Scripts\activate         # Windows
 ```
 
-### 3. Crear un entorno virtual
-
-**Windows**
-
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-**Linux / macOS**
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 4. Instalar las dependencias
+3. Instala las dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Ejecutar las migraciones
+4. Entra al directorio del proyecto Django:
 
 ```bash
-python manage.py makemigrations
+cd dcrm
+```
+
+5. Ejecuta las migraciones:
+
+```bash
 python manage.py migrate
 ```
 
-### 6. Crear un superusuario (opcional)
+6. Crea un superusuario para acceder al panel administrativo:
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 7. Iniciar el servidor
+7. Inicia el servidor:
 
 ```bash
 python manage.py runserver
 ```
 
-Abrir en el navegador:
+La aplicación estará disponible en:
 
-```
-http://127.0.0.1:8000/
-```
-
-## 📸 Capturas de pantalla
-
-Puedes agregar imágenes del proyecto aquí.
-
-```
-docs/
-├── inicio.png
-├── crear.png
-├── editar.png
-└── eliminar.png
+```text
+http://127.0.0.1:8000
 ```
 
-Ejemplo:
+## 🗄️ Configuración de la base de datos
 
-```markdown
-![Inicio](docs/inicio.png)
-```
+El proyecto está configurado para usar MySQL si el servicio está disponible en `localhost:3306`, con estos valores por defecto:
 
-## ⚙️ Funcionalidades
+- Base de datos: `clientes`
+- Usuario: `root`
+- Contraseña: vacía
+- Puerto: `3306`
 
-- Gestión completa de registros.
-- Formularios con validaciones.
-- Navegación sencilla.
-- Diseño responsive.
-- Administración desde Django Admin.
+Si no encuentra MySQL disponible, el sistema utiliza automáticamente SQLite mediante `db.sqlite3`.
 
-## 📁 Base de datos
+> Si deseas cambiar la configuración, edita el archivo [dcrm/dcrm/settings.py](dcrm/dcrm/settings.py).
 
-El proyecto utiliza **SQLite** por defecto, aunque puede configurarse para trabajar con:
+## 👤 Uso básico
 
-- PostgreSQL
-- MySQL
-- MariaDB
-- Oracle
+- Accede a `/register/` para crear una nueva cuenta.
+- Un usuario normal entra al portal de cliente en `/client_home/`.
+- Un administrador puede gestionar registros desde la interfaz principal.
+- Las rutas principales incluyen:
+  - `/` → home
+  - `/add_record/` → agregar cliente
+  - `/update/<id>/` → editar cliente
+  - `/record/<id>/` → ver detalle del cliente
+  - `/delete/<id>/` → eliminar cliente
 
-Modificando el archivo:
+## 🧪 Pruebas
 
-```
-proyecto/settings.py
-```
-
-## 🧪 Ejecutar pruebas
+Para ejecutar la suite de pruebas:
 
 ```bash
 python manage.py test
 ```
 
+## 📌 Notas importantes
+
+- El proyecto usa un flujo simple de autenticación basado en usuarios de Django.
+- Los administradores tienen acceso a operaciones de gestión, mientras que los usuarios normales solo visualizan el portal cliente.
+- Puedes adaptar el sistema para agregar más campos o flujos de negocio según la necesidad.
+
 ## 🤝 Contribuciones
 
-Las contribuciones son bienvenidas.
+Las contribuciones son bienvenidas. Si quieres mejorar el proyecto:
 
-1. Haz un Fork.
-2. Crea una rama.
-
-```bash
-git checkout -b feature/nueva-funcionalidad
-```
-
+1. Haz un fork del repositorio.
+2. Crea una rama para tu funcionalidad.
 3. Realiza tus cambios.
-
-4. Haz commit.
-
-```bash
-git commit -m "Agrega nueva funcionalidad"
-```
-
-5. Envía los cambios.
-
-```bash
-git push origin feature/nueva-funcionalidad
-```
-
-6. Abre un Pull Request.
-
-## 📄 Licencia
-
-Este proyecto se distribuye bajo la licencia MIT.
-
-## 👨‍💻 Autor
-
-**Tu Nombre**
-
-GitHub: https://github.com/tu-usuario
-
----
-
-⭐ Si este proyecto te fue útil, considera darle una estrella en GitHub.
+4. Abre un pull request.
